@@ -1,0 +1,25 @@
+{
+  "name": "streamlabs",
+  "version": "1.0.0",
+  "description": "interview",
+  "main": "js/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinaboy/chatapp.git"
+  },
+  "keywords": [
+    "real-time"
+  ],
+  "author": "Q",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chinaboy/chatapp/issues"
+  },
+  "homepage": "https://github.com/chinaboy/chatapp#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
