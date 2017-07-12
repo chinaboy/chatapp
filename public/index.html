@@ -11,7 +11,9 @@
          
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <script src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -44,19 +46,24 @@
     </nav>
    
 
-    <div ng-controller="messageController" class="container container-fluid" ngShow="{{loggedIn}}">
-      <div class="jumbotron startpage" ngHide="{{loggedIn}}">
+    <div ng-controller="messageController" class="container container-fluid" >
+      <div class="jumbotron startpage" ng-hide="loggedIn">
         <div class="container">
           <h1>If those walls could talk</h1>
           <p>Behind the screen there is a secret chat room. If you want, you could enter your youtube username and password to get connected.</p>
           <p><a class="btn btn-primary btn-lg" href="#" role="button">See Above &raquo;</a></p>
         </div>
       </div>
-      <div class="container room" id="room">
+      <div class="container room" id="room" ng-show="loggedIn">
+        <div id="messages">
+          <div ng-repeat>
+
+          </div>
+        </div>
         <form id="user_message">
-          <input type="submit" ng-click="sendMessage()">
+          <input type="submit" ng-click="sendMessage(user)">
         </form>
-        <textarea form="user_message"></textarea>
+        <textarea form="user_message" ng-model="user.message"></textarea>
       </div>
     </div>    
 

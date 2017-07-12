@@ -4,7 +4,7 @@
   "description": "interview",
   "main": "js/server.js",
   "scripts": {
-    "start": "node js/server.js",
+    "start": "node public/js/server.js",
     "postinstall": "bower install"
   },
   "repository": {
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/chinaboy/chatapp#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "bower": "^1.7.7"
