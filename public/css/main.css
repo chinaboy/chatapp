@@ -1,15 +1,61 @@
-body {
+body{
     padding-top: 50px;
     padding-bottom: 20px;
+    font: 14px Helvetica, Arial, sans-serif;
 }
 
+.messageBoard{
+	width: 100%;
+	height: 300px;
+	background-color: #f7f8ff;
+	margin: 25px 0;
+	border-width: 8px;
+	line-height: 20px;
+	font-size: 12px;
+}
 
+.messageBoard > div{
+	padding-left: 3px;
+}
 
+.postArea{
+	margin: 5px 0;
+	width: 100%;
+	border-color: black;
+	border-width: 1;
+	flex-grow: 10: 
+}
 
+.postButton{
+	font-size: 18px;
+	color: #009933;
+	border-width: 0;
+	background-color: #ffffff;
+}
 
+ul{
+	display: flex;
+	width:100%;
+	list-style-type: none;
+	text-align: justify;
+}
 
+ul > li{
+	flex-direction: row;
+}
 
+li img{
+	flex-basis: 20px;
+}
 
+li button{
+	flex-basis: 10px;
+}
 
-
-
+.selectMessageBox{
+	width: 100%;
+	height: auto;
+	margin: 25px 0;
+	border-width: 10px;
+	border-color: #99ccff;
+}

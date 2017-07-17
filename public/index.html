@@ -6,14 +6,14 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-         
+        <meta name="google-signin-client_id" content="1008942176151-sp3a5v60rdiuc763h6h5g57n1ob7gmlb.apps.googleusercontent.com">
+        <link rel="stylesheet" href="css/bootstrap.min.css">        
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-        <script src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="js/vendor/angular.min.js"></script>
+        <script src="js/vendor/socket.io.js"></script>
+        <script src="js/vendor/angular-websocket.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -30,54 +30,55 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">Wonder Wall</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Youtube name" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success" onclick="">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
+        </div>        
       </div>
     </nav>
-   
 
-    <div ng-controller="messageController" class="container container-fluid" >
+    <div ng-controller="messageController as mc" class="container container-fluid" >
       <div class="jumbotron startpage" ng-hide="loggedIn">
         <div class="container">
           <h1>If those walls could talk</h1>
           <p>Behind the screen there is a secret chat room. If you want, you could enter your youtube username and password to get connected.</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">See Above &raquo;</a></p>
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>          
         </div>
       </div>
-      <div class="container room" id="room" ng-show="loggedIn">
-        <div id="messages">
-          <div ng-repeat>
-
+      <div class="container room" id="room" ng-show="loggedIn">                 
+          <div id="user_message_div" class="messageBoard">   
+            <div ng-repeat="msg in messages" >
+              {{msg.user}} says: {{msg.text}}
+            </div>
           </div>
-        </div>
-        <form id="user_message">
-          <input type="submit" ng-click="sendMessage(user)">
-        </form>
-        <textarea form="user_message" ng-model="user.message"></textarea>
+          <ul>
+            <li class="glyphicon glyphicon-user"></li>
+            <li><textarea class="postArea" form="user_message" ng-model="user.message"></textarea></li>        
+            <li><button class="postButton" type="submit" ng-click="sendMessage(user)">Post</button></li>
+          </ul>
+          <div>
+            <form name="form" novalidate>
+              <label>See messages by user</label>
+              <input type="text" ng-model="selectedUserName">
+              <input type="submit" ng-click="onSelectUser()" value="confirm"><p ng-show="{{invalidUser}}">No such user exists</p>
+            </form>
+          </div>
+          <div class="selectMessageBox">
+              <div ng-repeat="umsg in selectedUserMessages">
+                {{umsg}}
+              </div>
+          </div>
       </div>
     </div>    
 
     <div class="container">      
       <footer>
-        <p>&copy; Company 2015</p>
+        <p>&copy; Interview? July 2017</p>
       </footer>
     </div> 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-        <script src="../js/vendor/bootstrap.min.js"></script>
+    <script src="../js/vendor/bootstrap.min.js"></script>
 
-        <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     </body>
 </html>

@@ -1,34 +1,51 @@
-function connectYoutube(){
-	window.location = "chatroom/"
-}
+var socket = io.connect();
+var myApp = angular.module('chatapp',[]);
 
-var myApp = angular.module('chatapp',['ngWebSocket']);
+myApp.controller('messageController', ['$scope', '$http', function($scope, $http) { 
+	$scope.loggedIn = false;
+	$scope.invalidUser = false;
+	$scope.messages = [];
+	$scope.loggedInUser = "";
+	$scope.selectedUserName = "";
+	$scope.selectedUserMessages = "";
 
-myApp.factory('MyData', function($websocket) {
-	    // Open a WebSocket connection
-	    var dataStream = $websocket('ws://website.com/data');
+	$scope.sendMessage = function(user){
+		console.log(user.message);
+		socket.emit('message', {text: user.message, user: $scope.loggedInUser});
+		user.message = "";
+	};		
 
-	    var collection = [];
+	$scope.onMessage = function(message){
+		$scope.messages.push(message);
+		$scope.$apply();
+	};
 
-	    dataStream.onMessage(function(message) {
-	        collection.push(JSON.parse(message.data));
-	    });
+	$scope.onSelectUser = function(){
+		url = "/userMessages?user=" + $scope.selectedUserName;
+		$http.get(url).then(function(response){
+			console.log(response.data);
+			if(response.data.notext){
+				$scope.invalidUser = true;
+				$scope.selectedUserName = "";
+				$scope.selectedUserMessages = "";
+			}else{
+				$scope.selectedUserMessages = response.data.text;
+			}
+		}, function(err){console.log(err)});
+	};
 
-	    var methods = {
-	        collection: collection,
-	        get: function() {
-	          dataStream.send(JSON.stringify({ action: 'get' }));
-	        }
-        };
-
-       return methods;
-    }).
-	controller('messageController', ['$scope',  function($scope, MyData) {
-  
+	function onSignIn(googleUser) {		
+		var profile = googleUser.getBasicProfile();
+		$scope.loggedInUser = profile.getName();
+		$scope.avatarUrl = profile.getImageUrl();
 		$scope.loggedIn = true;
-		$scope.sendMessage = function(user){
-			console.log(user.message);
-		}
-		$scope.messages = MyData;
-	}]);
+		$scope.$apply();
+	};
+	window.onSignIn = onSignIn;
+}]);
 
+socket.on('message', function(message){ 
+	var scope = angular.element(document.getElementById('user_message_div')).scope();
+	scope.onMessage(message);
+	scope.$apply();
+});
