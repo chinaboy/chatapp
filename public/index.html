@@ -20,6 +20,7 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+  <div ng-controller="messageController as mc">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -30,11 +31,12 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">Wonder Wall</a>
+          <a class="navbar-brand" ng-show="loggedIn" onclick="signOut()">Sign Out</a>
         </div>        
       </div>
     </nav>
 
-    <div ng-controller="messageController as mc" class="container container-fluid" >
+    <div class="container container-fluid" id="content">
       <div class="jumbotron startpage" ng-hide="loggedIn">
         <div class="container">
           <h1>If those walls could talk</h1>
@@ -67,7 +69,8 @@
           </div>
       </div>
     </div>    
-
+  </div>
+    
     <div class="container">      
       <footer>
         <p>&copy; Interview? July 2017</p>

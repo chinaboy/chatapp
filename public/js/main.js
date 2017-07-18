@@ -41,6 +41,7 @@ myApp.controller('messageController', ['$scope', '$http', function($scope, $http
 		$scope.loggedIn = true;
 		$scope.$apply();
 	};
+
 	window.onSignIn = onSignIn;
 }]);
 
@@ -49,3 +50,15 @@ socket.on('message', function(message){
 	scope.onMessage(message);
 	scope.$apply();
 });
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      	console.log('User signed out.');
+    });
+	var scope = angular.element(document.getElementById('content')).scope();    
+    scope.loggedInUser = "";
+	scope.avatarUrl = null;
+	scope.loggedIn = false;
+	scope.$apply();
+ }
