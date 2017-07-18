@@ -44,6 +44,6 @@ io.on('connection', function (socket) {
 	})
 });
 
-server.listen(80, function () {
+server.listen(3000, function () {
     console.log('Chatapp listening on port 3000!')
 })
