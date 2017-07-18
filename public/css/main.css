@@ -18,38 +18,35 @@ body{
 	padding-left: 3px;
 }
 
+.comment{
+	display: flex;
+	width:100%;
+	list-style-type: none;
+	justify-content: flex-end;
+}
+
 .postArea{
-	margin: 5px 0;
 	width: 100%;
+}
+
+.postArea > textarea{
+	margin: 0 0;
+	width: inherit;
 	border-color: black;
 	border-width: 1;
-	flex-grow: 10: 
+}
+
+.belowComment{
+	display: flex;
+	justify-content: flex-end;
 }
 
 .postButton{
+	
 	font-size: 18px;
 	color: #009933;
 	border-width: 0;
 	background-color: #ffffff;
-}
-
-ul{
-	display: flex;
-	width:100%;
-	list-style-type: none;
-	text-align: justify;
-}
-
-ul > li{
-	flex-direction: row;
-}
-
-li img{
-	flex-basis: 20px;
-}
-
-li button{
-	flex-basis: 10px;
 }
 
 .selectMessageBox{

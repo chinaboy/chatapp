@@ -50,11 +50,12 @@
               {{msg.user}} says: {{msg.text}}
             </div>
           </div>
-          <ul>
-            <li class="glyphicon glyphicon-user"></li>
-            <li><textarea class="postArea" form="user_message" ng-model="user.message"></textarea></li>        
-            <li><button class="postButton" type="submit" ng-click="sendMessage(user)">Post</button></li>
-          </ul>
+          <div class="comment">
+            <div class="glyphicon glyphicon-user"></div>
+            <div class="postArea"><textarea form="user_message" ng-model="user.message"></textarea></div>  
+          </div>
+          <div class="belowComment"><button class="postButton" type="submit" ng-click="sendMessage(user)">Post</button></div>
+      </div>
           <div>
             <form name="form" novalidate>
               <label>See messages by user</label>
